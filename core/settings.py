@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f26+$e-=@q2t4rn#2o0k0(cr7qw6eem9)7kw=!em88efmco=zj'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -149,7 +149,7 @@ BASKET_SESSION_ID = 'basket'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Stripe payment
-STRIPE_ENDPOINT_SECRET = 'whsec_8e8230fd8b1e2f37784ee28d91d8c862909ccdb727d0ce1a74ae4027d9f54c54'
+STRIPE_ENDPOINT_SECRET = ''
 # stripe listen --forward-to localhost:8000/payment/webhook
 
 # Django countries customisation
