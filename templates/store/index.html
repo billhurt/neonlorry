@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-5 text-center container">
+
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">CC Tights</h1>
+      <p class="lead text-muted">Buy worn cabin crew items with discreet, free delivery.</p>
+      <p>
+        <a href="{% url 'store:shop' %}" class="btn btn-primary my-2">Shop</a>
+        <a href="{% url 'store:about' %}" class="btn btn-secondary my-2">About Us</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <h2 class="py-3">Latest items</h2>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% if not latest_products %}
+      <div class="col-12">There are currently no products active. Please check again later.</div>
+      {% endif %}
+      {% for product in latest_products %}
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none"><img
+              src="{{ product.image.url }}" alt="image" class="img-fluid"></a>
+          <div class="card-body">
+            <p class="card-text">
+              <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none">{{ product.title }}</a>
+            </p>
+            <p class="lead">{{ product.description|truncatewords:"20" }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none"><button type="button"
+                    class="btn btn-sm btn-outline-secondary">View</button></a>
+                <button type="button" class="btn btn-sm btn-outline-primary add-button" data-index="{{product.id}}">Add
+                  to Basket</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  $(document).on('click', '.add-button', function (e) {
+    e.preventDefault();
+    var prodid = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: '{% url "basket:basket_add" %}',
+      data: {
+        productid: $(this).data('index'),
+        productqty: 1,
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: 'post'
+      },
+      success: function (json) {
+        document.getElementById("basket-qty").innerHTML = json.qty
+      },
+      error: function (xhr, errmsg, err) {}
+    });
+  })
+</script>
+{% endblock %}
