@@ -40,7 +40,7 @@ let custAdd = document.getElementById("custAdd").value;
 let custAdd2 = document.getElementById("custAdd2").value;
 let townCity = document.getElementById("townCity").value;
 let county = document.getElementById("county").value;
-let postCode = document.getElementById("postCode").value;
+let dataString = $("#shipping-form, #payment-form").serializeArray()
 
   $.ajax({
       type: "POST",
@@ -49,9 +49,11 @@ let postCode = document.getElementById("postCode").value;
         order_key: clientsecret,
         csrfmiddlewaretoken: CSRF_TOKEN,
         action: "post",
+        data: dataString,
       },
       success: function (json) {
         console.log(json.success)
+        console.log(dataString)
 
         stripe.confirmCardPayment(clientsecret, {
           payment_method: {
@@ -62,7 +64,6 @@ let postCode = document.getElementById("postCode").value;
                   line2:custAdd2,
                   city:townCity,
                   state:county,
-                  postal_code:postCode,
               },
               email: email,
               name: custName,

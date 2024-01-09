@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container mt-5">
   <h1 class="h2">Your Addresses</h1>
-  <div>Manage your <b>addresses</b> and delivery preferences</div>
+  <div>Manage your <b>addresses</b></div>
   <hr />
   <div class="container px-0">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -41,7 +41,7 @@
             <p class="card-text m-0">{{address.address_line2}}</p>
             <p class="card-text m-0">{{address.town_city}}</p>
             <p class="card-text m-0">{{address.postcode}}</p>
-            <p class="card-text m-0">Phone number: {{address.phone}}</p>
+            {% if address.phone %}<p class="card-text m-0">Phone number: {{address.phone}}</p>{% else %}{% endif %}
             <div class="pt-5">
               <a href="{% url 'account:edit_address' address.id %}" class="text-decoration-none">Edit</a>
               |

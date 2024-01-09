@@ -6,6 +6,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
+from orders.models import Order
 
 from basket.basket import Basket
 from orders.views import payment_confirmation
@@ -54,7 +55,7 @@ def stripe_webhook(request):
     # Handle the event
     if event.type == 'payment_intent.succeeded':
         payment_confirmation(event.data.object.client_secret)
-
+        
     else:
         print('Unhandled event type {}'.format(event.type))
 

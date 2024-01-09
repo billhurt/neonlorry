@@ -2,7 +2,35 @@ from django import forms
 from django.contrib.auth.forms import (AuthenticationForm, PasswordResetForm, SetPasswordForm)
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-from .models import UserBase
+from .models import Customer, Address
+
+
+class UserAddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ["full_name", "phone", "address_line", "address_line2", "town_city", "postcode"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["full_name"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+        )
+        self.fields["phone"].widget.attrs.update({"class": "form-control mb-2 account-form", "placeholder": "Phone"})
+        self.fields["phone"].required = False
+        self.fields["address_line"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Address Line 1"}
+        )
+        self.fields["address_line2"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Address Line 2"}
+        )
+        self.fields["address_line2"].required = False
+        self.fields["town_city"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Town/City"}
+        )
+        self.fields["town_city"].required = False
+        self.fields["postcode"].widget.attrs.update(
+            {"class": "form-control mb-2 account-form", "placeholder": "Postcode"}
+        )
 
 
 class UserLoginForm(AuthenticationForm):
@@ -27,13 +55,13 @@ class RegistrationForm(forms.ModelForm):
     password2 = forms.CharField(label='Enter your chosen password again', widget=forms.PasswordInput)
 
     class Meta:
-        model = UserBase
+        model = Customer
         fields = ('user_name', 'email')
 
     
     def clean_username(self):
         user_name = self.cleaned_data['user_name'].lower()
-        r = UserBase.objects.filter(user_name=user_name)
+        r = Customer.objects.filter(user_name=user_name)
         if r.count():
             raise forms.ValidationError("Sorry, this username already exists.")
         return user_name
@@ -46,7 +74,7 @@ class RegistrationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if UserBase.objects.filter(email=email).exists():
+        if Customer.objects.filter(email=email).exists():
             raise forms.ValidationError(
                 'This email already exists. Please use another email address.')
         return email
@@ -54,7 +82,7 @@ class RegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['user_name'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Username'})
+            {'class': 'form-control mb-3', 'placeholder': 'Name'})
         self.fields['email'].widget.attrs.update(
             {'class': 'form-control mb-3', 'placeholder': 'E-mail', 'name': 'email', 'id': 'id_email'})
         self.fields['password'].widget.attrs.update(
@@ -69,7 +97,7 @@ class PwdResetForm(PasswordResetForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        u = UserBase.objects.filter(email=email)
+        u = Customer.objects.filter(email=email)
         if not u:
             raise forms.ValidationError(
                 'Account not found.')
@@ -89,44 +117,20 @@ class UserEditForm(forms.ModelForm):
         label='Account email (can not be changed)', max_length=200, widget=forms.TextInput(
             attrs={'class': 'form-control mb-3', 'placeholder': 'email', 'id': 'form-email', 'readonly': 'readonly'}))
 
-    user_name = forms.CharField(
-        label='Account username (can not be changed)', max_length=150, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'username', 'id': 'form-username', 'readonly': 'readonly'}))
-
-    first_name = forms.CharField(
-        label='First name', min_length=2, max_length=50, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'First name', 'id': 'form-firstname'}))
+    name = forms.CharField(
+        label='Your name', max_length=150, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'username', 'id': 'form-username'}))
     
-    last_name = forms.CharField(
-        label='Last name', min_length=2, max_length=50, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Last name', 'id': 'form-lastname'}))
-    
-    address_line_1 = forms.CharField(
-        label='Address Line 1', max_length=150, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Address Line 1', 'id': 'form-address-line-1'}))
-    
-    address_line_2 = forms.CharField(
-        label='Address Line 2', max_length=150, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Address Line 2', 'id': 'form-address-line-2'}))
-    
-    town_city = forms.CharField(
-        label='Town/City', max_length=150, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Town/City', 'id': 'form-town-city'}))
-
-    postcode = forms.CharField(
-        label='Postcode', max_length=12, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Postcode', 'id': 'form-postcode'}))
-
-    country = CountryField().formfield(initial='GB', label='Country', widget=CountrySelectWidget(
-        attrs={'class': 'form-control', 'placeholder': 'Country', 'id': 'form-country'}
-    ))
+    mobile = forms.CharField(
+        label='Mobile', max_length=150, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'Mobile', 'id': 'form-mobile'}))
 
     class Meta:
-        model = UserBase
-        fields = ('email', 'user_name', 'first_name', 'last_name', 'address_line_1', 'address_line_2', 'town_city', 'postcode', 'country',)
+        model = Customer
+        fields = ('email', 'name', 'mobile')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['first_name'].required = True
-        self.fields['address_line_1'].required = True
-        self.fields['postcode'].required = True
+        self.fields['name'].required = True
+        self.fields['email'].required = True
+        self.fields['mobile'].required = False

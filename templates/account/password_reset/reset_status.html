@@ -30,11 +30,10 @@
                                 {% if 'email' in request.get_full_path %}
                                         <h3 class="mb-4">Password Reset Request Sent</h3>
                                         <p>Check your email!</p>
-                                        <p class='text-center'><a href="{% url "account:login" %}" >Login</a></p>
                                 {% endif%}
                                 {% if 'complete' in request.get_full_path %}
                                         <h3 class="mb-4 text-center">Password Reset Success</h3>
-                                        <p class='text-center'><a href="{% url "account:login" %}" >Login</a></p>
+                                        <a href="{% url "account:login" %}"><p class='text-center'><button class="btn btn-primary py-2 mb-4 fw-bold">Login</button></p></a>
                                 {% endif%}
                             </div>       
                         </div>

@@ -26,6 +26,59 @@
           <div class="container">
             <div class="row">
               <div class="col-12 col-lg-6 mx-auto">
+                <h3 class="mb-3">Shipping address <span
+                  class="text-muted">(UK only)</span></h3>
+                <div id="error-message" role="alert">
+                  <!-- Error messages in this element -->
+                </div>
+                <form id='shipping-form'>
+                  <div class="row g-3">
+                    <div class="col-sm-7">
+                      <label for="firstName" class="form-label">Customer Name</label>
+                      <input type="text" class="form-control" name="name" placeholder="" required>
+                      <div class="invalid-feedback">
+                        Valid first name is required.
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="address" class="form-label">Address Line 1</label>
+                      <input type="text" class="form-control" name="add1" placeholder="123 Nylon Way" required>
+                      <div class="invalid-feedback">
+                        Please enter your shipping address.
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="address2" class="form-label">Address Line 2 <span
+                          class="text-muted">(Optional)</span></label>
+                      <input type="text" class="form-control" name="add2" placeholder="Tightsville">
+                    </div>
+                    <div class="col-md-5">
+                        <label for="Town/City" class="form-label">Town/City <span
+                          class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" name="town_city" placeholder="">
+                        <div class="invalid-feedback">
+                          Please fill in this field.
+                        </div>
+                      </div>
+                    <div class="col-md-4">
+                      <label for="county" class="form-label">County <span
+                        class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" name="county">
+                      <div class="invalid-feedback">
+                        Please provide a valid county.
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <label for="Postcode" class="form-label">Postcode</label>
+                      <input type="text" class="form-control" placeholder="" name="post_code" required>
+                      <div class="invalid-feedback">
+                        Post code required.
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-12 col-lg-6 mx-auto">
                 <h3 class="mb-3">Billing address</h3>
                 <div id="error-message" role="alert">
                   <!-- Error messages in this element -->
@@ -33,17 +86,18 @@
                 <form id='payment-form'>
                   <div class="row g-3">
                     <div class="col-sm-7">
-                      <label for="firstName" class="form-label">Customer Name</label>
-                      <input type="text" class="form-control" id="custName" placeholder="" required>
+                      <label for="firstName" class="form-label">Cardholder's Name</label>
+                      <input type="text" class="form-control" id="custName" name="cardholder_name" placeholder="" required>
                       <div class="invalid-feedback">
                         Valid first name is required.
                       </div>
                     </div>
                     <div class="col-12">
-                      <label for="email" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                      <label for="email" class="form-label">Email <span
+                        class="text-muted">(to receive payment confirmation)</span></label>
+                      <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
                       <div class="invalid-feedback">
-                        Please enter a valid email address for shipping updates.
+                        Please enter a valid email address to receive payment confirmation.
                       </div>
                     </div>
                     <div class="col-12">
@@ -74,16 +128,10 @@
                         Please provide a valid county.
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <label for="Postcode" class="form-label">Postcode</label>
-                      <input type="text" class="form-control" id="postCode" placeholder="" required>
-                      <div class="invalid-feedback">
-                        Post code required.
-                      </div>
-                    </div>
                   </div>
-                  <hr class="my-4">
-                  <h4 class="my-4">Payment</h4>
+            </div>
+            <hr class="my-4">
+                  <span><h4 class="my-4">Payment&nbsp;&nbsp;<img src='../media/images/stripe.svg' alt="Stripe Logo" style='max-width: 100px;'></h4></span>
                   <div id="card-element" class="form-control form-control-payment">
                     <!-- Payment elements will appear here -->
                   </div>
@@ -92,7 +140,6 @@
                   <button id="submit" class="btn btn-primary w-100 fw-bold" data-secret="{{ client_secret }}">Pay</button>
                 </form>
               </div>
-            </div>
           </div>
         </div>
       </div>

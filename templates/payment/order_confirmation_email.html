@@ -1,0 +1,20 @@
+{% autoescape off %}
+Hi {{ name.split.0|title }},
+
+Thanks for your order! Here's your order summary:
+
+{% for item in order_items %}
+{{item.product.title}} (£{{item.price}}) x{{item.quantity}}
+{% endfor %}
+
+Total: £{{total_paid}}
+
+Check your account dashboard for dispatch updates.
+
+If you'd like to get in touch, please email orders@cctights.com, quoting Order Number {{order_id}}.
+
+Enjoy your order!
+
+CC Tights
+
+{% endautoescape %}
