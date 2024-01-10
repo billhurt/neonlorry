@@ -21,7 +21,8 @@
                     <img class="img-fluid mx-auto d-block py-3" alt="Responsive image" src="{{ product.image.url }}"
                         style="max-width: 300px;" />
                     <a class="text-decoration-none text-reset" href="{{item.product.get_absolute_url}}">
-                        <h5 class="card-text pb-3">{{product.title}} <small class="text-muted">£{{product.price}}</small></h5>
+                        <h5 class="card-text pb-3">{{product.title}} <small
+                                class="text-muted">£{{product.price}}</small></h5>
                     </a>
                     <label for="select">Qty</label>
                     <select id="select{{product.id}}" class="store-select-dropdown">

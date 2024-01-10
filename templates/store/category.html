@@ -1,34 +1,35 @@
-{% extends '../base.html' %} 
+{% extends '../base.html' %}
 {% block content %}
 <main>
-    <h5>{{ category.name|title }}</h5>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for product in products %}
-          
-            <div class="col">
-                <div class="card shadow-sm">
-                  <img src="{{ product.image.url }}" alt="image" class="img-fluid">
-                  <div class="card-body">
-                    <p class="card-text">
-                        <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none">{{ product.title }}</a>
-                    </p>
-                    <p class="lead">{{ product.description|truncatewords:"20" }}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-                        <button type="button" class="btn btn-sm btn-outline-primary">Add to Basket</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <h5>{{ category.name|title }}</h5>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for product in products %}
 
-            {% endfor %}
-    
+    <div class="col">
+      <div class="card shadow-sm">
+        <img src="{{ product.image.url }}" alt="image" class="img-fluid">
+        <div class="card-body">
+          <p class="card-text">
+            <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none">{{ product.title }}</a>
+          </p>
+          <p class="lead">{{ product.description|truncatewords:"20" }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none"><button type="button"
+                  class="btn btn-sm btn-outline-secondary">View</button></a>
+              <button type="button" class="btn btn-sm btn-outline-primary">Add to Basket</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  
-  </main>
+
+    {% endfor %}
+
+  </div>
+  </div>
+  </div>
+  </div>
+
+</main>
 {% endblock %}
