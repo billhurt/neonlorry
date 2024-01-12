@@ -18,7 +18,7 @@ def product_detail(request, slug):
     # Get single product, a list of random products and pass the amount of a particular product that is available
     product = get_object_or_404(Product, slug=slug, in_stock=True)
     products = list(Product.products.all())
-    n = 2
+    n = len(products)
     random_products = random.sample(products, n)
     template_vars = {
         'product': product,
