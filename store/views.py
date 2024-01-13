@@ -19,7 +19,7 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, in_stock=True)
     products = list(Product.products.all())
     n = len(products)
-    random_products = random.sample(products, n)
+    random_products = random.sample(products, n)[:3]
     template_vars = {
         'product': product,
         'random_products': random_products,
