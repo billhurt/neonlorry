@@ -58,7 +58,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
         send_mail(
             subject,
             message,
-            'noreply@cctights.com',
+            'noreply@cctights.co.uk',
             [self.email],
             fail_silently=False,
         )
