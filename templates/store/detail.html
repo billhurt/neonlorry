@@ -19,12 +19,16 @@
                 <p class="text-muted">includes VAT</p>
               </div>
               <div>
+                {% if product.qty_available < 1 %}
+                <p class='text-muted'>Out of stock.</p>
+                {% else %}
                 <label for="select">Qty</label>
                 <select id="select" class="h6 store-select-dropdown">
                   {% for x in product.get_qty_available_range|slice:":4" %}
                   <option value="{{forloop.counter}}">{{forloop.counter}}</option>
                   {% endfor %}
                 </select>
+                {% endif %}
               </div>
             </div>
             <p>{{product.description|truncatewords:"15"}}</p>
