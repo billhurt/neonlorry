@@ -6,14 +6,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Buy Used/Worn Cabin Crew Tights, Shoes and Heels, Safely & Securely"/>
   <title>{% block title %}CC Tights{% endblock %}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <link rel="icon" href="media/images/airplane-fill.svg" sizes="any" type="image/svg+xml">
+  <link rel="icon" href="{% static 'store/airplane-fill.svg' %}" sizes="any" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
   <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MM04DYMQFG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MM04DYMQFG');
+</script>
+  <meta property="og:url" content="https://www.cctights.co.uk/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CC Tights" />
+  <meta property="og:description" content="Buy Used/Worn Cabin Crew Tights, Shoes and Heels, Safely & Securely" />
+  <meta property="og:image" content="https://www.cctights.co.uk/media/images/tights.jpg" />
 </head>
 
 <body>
