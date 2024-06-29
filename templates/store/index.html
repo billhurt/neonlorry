@@ -5,10 +5,10 @@
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light">CC Tights</h1>
-      <h2 class="lead text-muted">Buy my worn cabin crew tights & shoes with discreet, free delivery.</h2>
+      <p class="lead text-muted">Buy worn cabin crew items with discreet, free delivery.</p>
       <p>
         <a href="{% url 'store:shop' %}" class="btn btn-primary my-2">Shop</a>
-        <a href="{% url 'store:about' %}" class="btn btn-secondary my-2">About Me</a>
+        <a href="{% url 'store:about' %}" class="btn btn-secondary my-2">About Us</a>
       </p>
     </div>
   </div>
@@ -16,7 +16,8 @@
 
 <div class="album py-5 bg-light">
   <div class="container">
-    <h2 class="py-3">Latest Worn Shoes & Tights</h2>
+    <h2 class="py-3">Latest items</h2>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% if not latest_products %}
       <div class="col-12">There are currently no products active. Please check again later.</div>
@@ -37,10 +38,13 @@
                 <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none"><button type="button"
                     class="btn btn-sm btn-outline-secondary">View</button></a>
                 {% if product.qty_available %}
-                <button type="button" class="btn btn-sm btn-outline-primary add-button" data-index="{{product.id}}">Add
-                  to Basket</button>
+                <div>
+                    <button type="button" class="btn btn-sm btn-outline-primary add-button" data-index="{{product.id}}">Add
+                    to Basket</button>
+                </div>
+                <span class="text-muted px-2">£{{ product.price }}</span>
                   {% else %}
-                  &nbsp;
+                  <p class='text-muted px-2'>Out of stock.</p>
                   {% endif %}
               </div>
             </div>
