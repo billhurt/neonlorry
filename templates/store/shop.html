@@ -3,7 +3,6 @@
 <div class="album py-5 bg-light">
   <div class="container">
     <h2 class="py-3 text-center">Worn Cabin Crew Items</h2>
-
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% if not products %}
       <div class="col-12">There are currently no products active. Please check again later.</div>
@@ -23,8 +22,12 @@
               <div class="btn-group">
                 <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none"><button type="button"
                     class="btn btn-sm btn-outline-secondary">View</button></a>
+                {% if product.qty_available %}
                 <button type="button" class="btn btn-sm btn-outline-primary add-button" data-index="{{product.id}}">Add
                   to Basket</button>
+                  {% else %}
+                  &nbsp;
+                  {% endif %}
               </div>
             </div>
           </div>
