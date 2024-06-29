@@ -8,7 +8,6 @@
       <div class="col-12">There are currently no products active. Please check again later.</div>
       {% endif %}
       {% for product in products %}
-
       <div class="col">
         <div class="card shadow-sm">
           <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none"><img
@@ -23,10 +22,13 @@
                 <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none"><button type="button"
                     class="btn btn-sm btn-outline-secondary">View</button></a>
                 {% if product.qty_available %}
-                <button type="button" class="btn btn-sm btn-outline-primary add-button" data-index="{{product.id}}">Add
-                  to Basket</button>
+                <div>
+                    <button type="button" class="btn btn-sm btn-outline-primary add-button" data-index="{{product.id}}">Add
+                    to Basket</button>
+                </div>
+                <span class="text-muted px-2">£{{ product.price }}</span>
                   {% else %}
-                  &nbsp;
+                  <p class='text-muted px-2'>Out of stock.</p>
                   {% endif %}
               </div>
             </div>
