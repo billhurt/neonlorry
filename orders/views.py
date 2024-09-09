@@ -59,15 +59,15 @@ def payment_confirmation(data):
             
     
     send_mail(
-            'CC Tights - Order Confirmation' + ' Order ID: ' + str(order_id), 
+            'CC Tights - Order Confirmation',
             render_to_string('payment/order_confirmation_email.html', {
             'name': name,
             'order_items': order_items,
             'total_paid': total_paid,
             'order_id': order_id,
         }),
-            'noreply@cctights.com',
-            [email, 'orders@cctights.com'],
+            'noreply@cctights.co.uk',
+            [email, 'orders@cctights.co.uk'],
             fail_silently=False,
          ),
 
